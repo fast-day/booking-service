@@ -1,0 +1,82 @@
+import { cva } from "class-variance-authority";
+
+export const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-md font-extrabold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-80 cursor-pointer duration-200",
+  {
+    variants: {
+      variant: {
+        transparent: "",
+        default: "px-6 bg-primary text-white hover:bg-primary/90 active:bg-primary/70 disabled:hover:bg-primary/80 disabled:active:bg-primary/80",
+        link: "text-primary underline-offset-4 hover:underline disabled:hover:no-underline",
+        industry: "p-4.5! 480:p-6! rounded-18 bg-card flex items-center justify-center cursor-pointer border-2 border-transparent hover:border-primary active:opacity-60 active:scale-96 duration-200!",
+        prev: "px-6 py-3 bg-white! rounded-13 hover:opacity-90 active:opacity-75",
+        dropdown: "bg-white/4 w-full rounded-12 pl-1 py-1 pr-2 flex items-center justify-between gap-1.5 cursor-pointer",
+        location_dropdown: "w-full flex items-center gap-3 px-2.5 py-2 hover:bg-primary/90 active:opacity-55 hover:text-white/90 duration-200 text-white/70 cursor-pointer rounded-12",
+        accent: "font-medium px-5 bg-accent-foreground text-white hover:bg-accent-foreground/95 active:opacity-85",
+        secondary: "font-medium bg-card border border-border px-5 hover:bg-border-foreground active:opacity-70",
+        white: "bg-white text-foreground",
+        ghost: "font-medium text-sm hover:text-primary",
+        gray: "bg-card text-accent font-medium border border-transparent",
+        dashed: "bg-transparent border border-dashed font-medium hover:bg-primary/10 py-4 px-8",
+        orange: "bg-orange px-6 text-white hover:bg-orange/90 active:bg-orange/70 disabled:hover-orange/80 disabled:active:bg-orange/80",
+        dialog_close: "px-10! py-3! w-auto! font-bold text-md bg-card text-primary active:scale-98 active:opacity-80",
+        dialog_apply: "px-10! py-3! w-auto! font-bold text-md bg-primary text-white active:scale-98 active:opacity-80",
+        action_xl: "rounded-3xl bg-card/60 p-6 text-2xl font-bold leading-none justify-start",
+        action: "bg-white/40 px-5 font-medium hover:bg-white/90",
+        remove: "bg-error-background rounded-full flex items-center justify-center text-white active:scale-98 active:opacity-75 hover:opacity-90",
+        select: "min-w-full data-[placeholder]:text-foreground/30 font-medium [&_svg:not([class*='text-'])]:text-foreground focus-visible:border-border focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 aria-invalid:border-destructive flex items-center justify-between gap-2 border border-transparent text-md whitespace-nowrap transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 bg-card/60 w-full p-4 min-h-14 rounded-2xl",
+        red: "bg-red text-white",
+        pagination: "p-0 bg-card hover:bg-border leading-3 font-bold",
+
+      },
+      size: {
+        none: "",
+        default: "w-full h-12.5 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "size-9",
+        iconSm: "size-8",
+        icon_20: "size-5",
+        icon_24: "size-6",
+        icon_28: "size-7",
+        icon_36: "size-9",
+        icon_40: "size-10",
+        icon_42: "size-10.5",
+        icon_44: "size-11",
+        icon_48: "size-12",
+        icon_60: "size-15",
+
+        size_24: "h-6",
+        size_28: "h-7",
+        size_32: "h-8",
+        size_36: "h-9",
+        size_38: "h-9.5 rounded-12! text-sm",
+        size_40: "h-10",
+        size_42: "h-11 w-full font-medium",
+        size_44: "h-11",
+        size_48: "h-12",
+        size_54: "h-13.5",
+        size_56: "h-14",
+        size_60: "h-15 w-full text-base font-medium",
+      },
+      active: {
+        none: "",
+        scale_sm: "active:scale-99",
+        scale_98: "active:scale-98",
+      },
+      animation: {
+        none: "",
+        toggle: "active:scale-97 active:opacity-80",
+        toggle_sm: "active:scale-98 active:opacity-80",
+        pulse: "disabled:animate-pulse",
+
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      active: "none",
+      animation: "none",
+    },
+  },
+);
