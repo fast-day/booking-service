@@ -1,7 +1,8 @@
+import { OrderLayout } from '@/widgets/layout'
 import { BaseLayout } from '@/widgets/layout/ui/base-layout'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_app/_layout')({
+export const Route = createFileRoute('/_order/_layout')({
   component: RouteComponent,
   notFoundComponent: () => <div>упс</div>
 })
@@ -9,7 +10,9 @@ export const Route = createFileRoute('/_app/_layout')({
 function RouteComponent() {
   return (
     <BaseLayout>
-      <Outlet />
+      <OrderLayout>
+        <Outlet />
+      </OrderLayout>
     </BaseLayout>
   )
 }
