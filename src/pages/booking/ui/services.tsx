@@ -15,6 +15,9 @@ export const ServicePage = ({ company, location_id, user_id }: IServicePageProps
         <ServiceCard />
         <ServiceCard />
         <ServiceCard />
+        <ServiceCard />
+        <ServiceCard />
+        <ServiceCard />
       </div>
     </div>
   )

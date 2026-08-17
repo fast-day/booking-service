@@ -1,4 +1,5 @@
-import { ChevronIcon } from "@/shared/icons"
+import { useOrderState } from "@/entities/order";
+import { CheckIcon, ChevronIcon } from "@/shared/icons"
 import { Avatar, Button, Card, CardContent } from "@/shared/ui"
 import { cn } from "@/shared/utils";
 import { useState } from "react";
@@ -6,12 +7,19 @@ import { useState } from "react";
 export const ServiceCard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  
   const onClick = () => {
     setIsOpen(p => !p);
   }
+  
+  /* ===== TEST ===== */
+  const { setService } = useOrderState();
+  const handleSelect = (name: string, price: string) => {
+    setService({ name, price })
+  }
 
   return (
-    <Card className="cursor-pointer hover:bg-primary/10 duration-200">
+    <Card className="cursor-pointer hover:bg-primary/10 duration-200" onClick={() => handleSelect("TEST", "299")}>
       <CardContent className="px-4 py-3.75 grid gap-5">
         <div className="flex items-center gap-3.75 w-full">
           <Avatar size={"size_64"} id={"profile.id"} name={"profile.full_name"} avatar_url={null} />
@@ -40,7 +48,9 @@ export const ServiceCard = () => {
 
             <div className="grid">
               <div className="flex items-center gap-2.5">
-                <div className="w-6.5 h-6.5 flex items-center justify-center bg-white rounded-12"></div>
+                <div className="w-6.5 h-6.5 flex items-center justify-center bg-white rounded-12">
+                  <CheckIcon width={20} height={20} />
+                </div>
                 <p className="text-sm font-medium">Индивидуальная консультация</p>
               </div>
             </div>
