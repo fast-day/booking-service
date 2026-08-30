@@ -1,23 +1,25 @@
 import { ServiceCard } from "@/entities/service";
+import { useGetServices } from "../model/hooks/service.hook";
 
 interface IServicePageProps {
-  company: string;
-  location_id: string;
   user_id: string;
 }
 
-export const ServicePage = ({ company, location_id, user_id }: IServicePageProps) => {
+export const ServicePage = ({ user_id }: IServicePageProps) => {
+  const { isLoading, data } = useGetServices(user_id);
+
   return (
     <div className="py-6 max-w-145 mx-auto w-full space-y-10">
       <h1 className="text-3xl font-extrabold leading-7">Выберите услугу</h1>
 
       <div className="grid gap-2.5">
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
+        {isLoading ? (
+          <div>Загрузка...</div>
+        ): (
+          data && data.map((service) => (
+            <ServiceCard {...service} key={service.id} />
+          ))
+        )}
       </div>
     </div>
   )

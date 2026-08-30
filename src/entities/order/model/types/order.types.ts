@@ -1,5 +1,5 @@
 /** ===== TEST  ===== **/
 export interface IOrderSelectService {
   name: string;
-  price: string;
+  price: number;
 }

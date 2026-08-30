@@ -1,31 +1,33 @@
 import { OrderEmpty, OrderService, useOrderState } from "@/entities/order"
 import { EmployeeCard } from "@/entities/user"
+import { useInitialize } from "@/features/initialize"
 import { ChevronIcon } from "@/shared/icons"
 import { Button } from "@/shared/ui"
 import { ContentPanel } from "@/widgets/content-panel/ui/content-panel"
-import type { PropsWithChildren } from "react"
+import { AppLoading } from "@/widgets/loading"
+import { type PropsWithChildren } from "react"
 
-export const OrderLayout = ({ children }: PropsWithChildren) => {
+interface IOrderLayoutProps extends PropsWithChildren {
+  company: string;
+  location_id: string;
+  user_id: string;
+}
+
+export const OrderLayout = ({ company, location_id, user_id, children }: IOrderLayoutProps) => {
+  const { isLoading, data } = useInitialize(company, location_id, user_id);
+
   const { order } = useOrderState();
 
-  console.log(order)
+  if (isLoading) {
+    return <AppLoading />
+  }
+
   return (
     <div className="flex justify-between h-full">
       {children}
       <ContentPanel>
         <div className="grid gap-6">
-          <EmployeeCard
-            id={"123"}
-            profile={{
-              id: "123",
-              first_name: "Иван",
-              last_name: "Иванов",
-              full_name: "Иван Иванов",
-              phone: "8 900 000 00 00",
-              position: "Детский психолог",
-              avatar: null
-            }}
-          />
+          {data && <EmployeeCard profile={data.employee.profile} /> }
           <Button
             size={"size_54"}
             className={"w-full font-medium"}

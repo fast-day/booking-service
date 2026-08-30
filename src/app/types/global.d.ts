@@ -34,6 +34,12 @@ declare global {
     meta: PaginationMeta;
   };
 
+  type FetchStateProps<D> = {
+    data: D | undefined;
+    isLoading: boolean;
+    error: string | null;
+  }
+
   type CurrencyType = "RUB" | "USD" | "EUR";
 
   type MarkType = "red" | "orange" | "green" | "blue" | "purple" | "teal" | "pink";

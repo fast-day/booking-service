@@ -1,7 +1,7 @@
 import { Avatar } from "@/shared/ui"
 import type { IEmployee } from "../types/employee.type";
 
-export const EmployeeCard = ({ profile }: IEmployee) => {
+export const EmployeeCard = ({ profile }: Omit<IEmployee, "id">) => {
   return (
     <div className="flex items-center gap-3.5">
       <Avatar size={"size_64"} id={profile.id} name={profile.full_name} avatar_url={profile.avatar} />

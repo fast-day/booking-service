@@ -1,10 +1,8 @@
-import { ServicePage } from '@/pages/booking'
-import { createFileRoute } from '@tanstack/react-router'
+import { OrderLayout } from '@/widgets/layout'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 import z from 'zod'
 
-export const Route = createFileRoute(
-  '/_order/_layout/$company/$location_id/$user_id/',
-)({
+export const Route = createFileRoute('/_order/_layout/$company/$location_id/$user_id')({
   params: {
     parse: (p) => ({
       company: z.string().parse(p.company),
@@ -23,5 +21,10 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const params = Route.useParams();
-  return <ServicePage user_id={params.user_id} />
+
+  return (
+    <OrderLayout {...params}>
+      <Outlet />
+    </OrderLayout>
+  )
 }

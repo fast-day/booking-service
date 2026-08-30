@@ -1,5 +1,5 @@
 import { WatermarkWorked } from "@/entities/watermark"
-import type { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 
 export const ContentPanel = ({ children }: PropsWithChildren) => {
   return (

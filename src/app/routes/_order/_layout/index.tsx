@@ -5,5 +5,5 @@ export const Route = createFileRoute('/_order/_layout/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/_app/_layout/"!</div>
+  return <div className='flex items-center justify-center flex-1'>Hello!</div>
 }
