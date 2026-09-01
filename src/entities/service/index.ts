@@ -1,3 +1,6 @@
+// TYPES
+export * from './model/types/service.type';
+
 // UI
 export { ServiceCard } from './ui/service-card';
 

@@ -5,7 +5,12 @@ import { cn, formatPrice, minuteFormat } from "@/shared/utils";
 import { useState } from "react";
 import type { IService } from "../model/types/service.type";
 
-export const ServiceCard = ({ id, name, price, duration, avatar }: IService) => {
+interface IServiceCardProps {
+  service: IService;
+}
+
+export const ServiceCard = ({ service }: IServiceCardProps) => {
+  const { id, name, price, duration, avatar } = service;
   const [isOpen] = useState(false);
   
   // const onClick = () => {
@@ -14,12 +19,13 @@ export const ServiceCard = ({ id, name, price, duration, avatar }: IService) => 
   
   /* ===== TEST ===== */
   const { setService } = useOrderState();
-  const handleSelect = (name: string, price: number) => {
-    setService({ name, price })
+
+  const handleSelect = (service: IService) => {
+    setService({ ...service })
   }
 
   return (
-    <Card className="cursor-pointer hover:bg-primary/10 duration-200" onClick={() => handleSelect(name, price.price)}>
+    <Card className="cursor-pointer hover:bg-primary/10 duration-200" onClick={() => handleSelect(service)}>
       <CardContent className="px-4 py-3.75 grid gap-5">
         <div className="flex items-center gap-3.75 w-full">
           <Avatar size={"size_64"} id={id} name={name} avatar_url={avatar} />

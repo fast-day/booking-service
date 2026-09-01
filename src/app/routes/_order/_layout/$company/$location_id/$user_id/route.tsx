@@ -15,7 +15,7 @@ export const Route = createFileRoute('/_order/_layout/$company/$location_id/$use
       user_id: p.user_id,
     }),
   },
-  errorComponent: () => <div>упс...</div>,
+  errorComponent: () => <div>упсz...</div>,
   component: RouteComponent,
 })
 

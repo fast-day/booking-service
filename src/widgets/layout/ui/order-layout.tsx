@@ -1,8 +1,8 @@
 import { OrderEmpty, OrderService, useOrderState } from "@/entities/order"
 import { EmployeeCard } from "@/entities/user"
 import { useInitialize } from "@/features/initialize"
-import { ChevronIcon } from "@/shared/icons"
-import { Button } from "@/shared/ui"
+import { NextStepButton } from "@/features/next-step"
+import { formatPrice } from "@/shared/utils"
 import { ContentPanel } from "@/widgets/content-panel/ui/content-panel"
 import { AppLoading } from "@/widgets/loading"
 import { type PropsWithChildren } from "react"
@@ -16,7 +16,7 @@ interface IOrderLayoutProps extends PropsWithChildren {
 export const OrderLayout = ({ company, location_id, user_id, children }: IOrderLayoutProps) => {
   const { isLoading, data } = useInitialize(company, location_id, user_id);
 
-  const { order } = useOrderState();
+  const { order, step, setStep } = useOrderState();
 
   if (isLoading) {
     return <AppLoading />
@@ -24,18 +24,19 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
 
   return (
     <div className="flex justify-between h-full">
-      {children}
+      <div className="py-6 max-w-145 mx-auto w-full space-y-10">
+        {children}
+      </div>
       <ContentPanel>
         <div className="grid gap-6">
           {data && <EmployeeCard profile={data.employee.profile} /> }
-          <Button
-            size={"size_54"}
-            className={"w-full font-medium"}
-            animation={"toggle_sm"}
-            disabled={order?.service === undefined}
-            iconRight={<ChevronIcon width={20} height={20} />}
-          >Далее</Button>
-
+          <NextStepButton
+            is_service={!!order?.service}
+            is_date={!!order?.date}
+            service_id={order?.service?.id}
+            setStep={setStep}
+            step={step}
+          />
           {order !== null && (
             <div>
 
@@ -45,7 +46,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
 
               <div className="flex items-center justify-between py-6">
                 <div className="text-2xl font-extrabold leading-8">Итого</div>
-                <div className="text-xl font-extrabold leading-8">{order.service?.price} ₽</div>
+                <div className="text-xl font-extrabold leading-8">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
               </div>
             </div>
           )}

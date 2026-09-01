@@ -1,16 +1,26 @@
 import { create } from "zustand";
-import type { IOrderSelectService } from "../types/order.types";
+import type { IService } from "@/entities/service";
+import type { OrderSteps } from "../types/order.types";
 
 interface OrderState {
   order: {
     /* ===== TEST ===== */
-    service?: IOrderSelectService;
+    service?: IService;
+    date?: Date,
   } | null;
+  step: OrderSteps;
 
-  setService: (service: IOrderSelectService) => void;
+  setService: (service: IService) => void;
+  setDate: (date: Date) => void;
+  setStep: (step: OrderSteps) => void;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
   order: null,
-  setService: (s) => set({ order: { service: s } }),
+  date: null,
+  step: "service",
+
+  setService: service => set({ order: { service } }),
+  setDate: date => set({ order: { date } }),
+  setStep: step => set({ step }),
 }));

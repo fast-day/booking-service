@@ -1,5 +1,1 @@
-/** ===== TEST  ===== **/
-export interface IOrderSelectService {
-  name: string;
-  price: number;
-}
+export type OrderSteps = "service" | "date" | "confirm";

@@ -5,5 +5,5 @@ export const Route = createFileRoute('/_order/_layout/$notFound')({
 })
 
 function RouteComponent() {
-  return <div>упс</div>
+  return <div>404</div>
 }
