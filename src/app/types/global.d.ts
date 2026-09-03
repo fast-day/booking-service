@@ -38,6 +38,8 @@ declare global {
     data: D | undefined;
     isLoading: boolean;
     error: string | null;
+    isError: boolean;
+    isSuccess: boolean;
   }
 
   type CurrencyType = "RUB" | "USD" | "EUR";

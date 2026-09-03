@@ -6,21 +6,23 @@ interface OrderState {
   order: {
     /* ===== TEST ===== */
     service?: IService;
-    date?: Date,
-  } | null;
+    date: Date,
+    slot?: string;
+  };
   step: OrderSteps;
 
   setService: (service: IService) => void;
   setDate: (date: Date) => void;
+  setSlot: (slot: string) => void;
   setStep: (step: OrderSteps) => void;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
-  order: null,
-  date: null,
+  order: { date: new Date() },
   step: "service",
 
-  setService: service => set({ order: { service } }),
-  setDate: date => set({ order: { date } }),
+  setService: service => set({ order: { service, date: new Date(), }, step: "service" }),
+  setDate: date => set(p => ({ order: { ...(p.order), date, slot: undefined }, })),
+  setSlot: slot => set(p => ({ order: { ...(p.order), slot },  step: "date", })),
   setStep: step => set({ step }),
 }));

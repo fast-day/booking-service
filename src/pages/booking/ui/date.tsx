@@ -1,39 +1,39 @@
 import { useOrderState } from "@/entities/order";
-import { slotApi } from "@/entities/slots";
-import { ApiError } from "@/shared/api/base/api";
-import { WeeKCalendar } from "@/widgets/calendar"
-import { useCallback, useEffect } from "react";
-import { toast } from "sonner";
+import { Slots, WeeKCalendar } from "@/widgets/calendar"
+import { useSlots } from "../model/hooks/slots.hook";
 
-export const DatePage = () => {
-  const { order, setDate } = useOrderState();
+interface IDatePageProps {
+  user_id: string;
+  location_id: string;
+}
 
-  const fetchSlots = useCallback(async () => {
-    try {
-      const res = await slotApi.get({
-        path: { user_id: "7b0d2933-788d-4d4d-8643-618ed7fffed1", location_id: "deb0ff26-4f88-4154-ae28-98a76d716a16", },
-        query: { date: "2026-08-06", duration: 10 }
-      });
+export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
+  const order = useOrderState().order;
+  const setDate = useOrderState().setDate;
+  const setSlot = useOrderState().setSlot;
 
-      console.log(res);
-    }
-    catch (err) {
-      if (err instanceof ApiError) {
-        toast.error(err.message);
-        console.error(err);
-      }
-    }
-  }, []);
+  const { data, isLoading, isSuccess, isError } = useSlots({
+    user_id,
+    location_id,
+    service: order?.service,
+    date: order.date,
+  });
 
-  useEffect(() => {
-    fetchSlots();
-  }, []);
+  const content = isLoading ? (
+    <div className="text-center text-sm py-10 opacity-60">Загрузка...</div>
+  ) : isError ? (
+    <div className="text-center text-sm py-10 opacity-60">Нет свободных слотов на выбранную дату</div>
+  ) : isSuccess ? (
+    <Slots data={data} selectSlot={order.slot} setSlot={setSlot} />
+  ) : <div className="text-center text-sm py-10 opacity-60">Произошла ошибка</div>;
 
   return (
     <>
       <h1 className="text-3xl font-extrabold leading-7">Выберите дату и время</h1>
 
-      <WeeKCalendar selected={order?.date || new Date()} onSelected={setDate} />
+      <WeeKCalendar selected={order.date} onSelected={setDate} />
+
+      {content}
     </>
   )
 }

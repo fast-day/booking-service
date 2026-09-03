@@ -1,4 +1,4 @@
-import { OrderEmpty, OrderService, useOrderState } from "@/entities/order"
+import { OrderDate, OrderEmpty, OrderService, useOrderState } from "@/entities/order"
 import { EmployeeCard } from "@/entities/user"
 import { useInitialize } from "@/features/initialize"
 import { NextStepButton } from "@/features/next-step"
@@ -32,13 +32,20 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
           {data && <EmployeeCard profile={data.employee.profile} /> }
           <NextStepButton
             is_service={!!order?.service}
-            is_date={!!order?.date}
+            is_slot={!!order?.slot}
             service_id={order?.service?.id}
+            company={company}
+            location_id={location_id}
+            user_id={user_id}
             setStep={setStep}
             step={step}
           />
-          {order !== null && (
+          {order.service !== undefined && (
             <div>
+
+              {order.slot && (
+                <OrderDate date={order.date} slot={order.slot} duration={order.service?.duration} />
+              )}
 
               {order.service && (
                 <OrderService {...order.service} />
@@ -52,7 +59,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
           )}
         </div>
 
-        {order === null && <OrderEmpty />}
+        {order.service === undefined && <OrderEmpty />}
 
       </ContentPanel>
     </div>
