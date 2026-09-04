@@ -1,5 +1,5 @@
 import type { OrderSteps } from "@/entities/order";
-import { ChevronIcon } from "@/shared/icons"
+import { ChevronIcon, NewOrderIcon } from "@/shared/icons"
 import { Button } from "@/shared/ui"
 import { useNavigate } from "@tanstack/react-router"
 
@@ -16,7 +16,9 @@ interface INextStepButtonProps {
 
 interface StepConfig {
   is_valid: () => boolean;
-  action: () => void;
+  action?: () => void;
+  text: string;
+  icon: React.ComponentType;
 }
 
 interface IStepConfig {
@@ -35,6 +37,8 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
         navigate({ to: `${service_id}/date` });
         setStep("date");
       },
+      text: "Далее",
+      icon: ChevronIcon,
     },
     date: {
       is_valid: () => is_slot,
@@ -42,12 +46,13 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
         navigate({ to: `/${company}/${location_id}/${user_id}/${service_id}/confirm` });
         setStep("confirm");
       },
+      text: "Продолжить",
+      icon: ChevronIcon,
     },
     confirm: {
       is_valid: () => is_service && is_slot,
-      action: () => {
-        console.log("test");
-      },
+      text: "Записаться",
+      icon: NewOrderIcon,
     }
   };
 
@@ -55,12 +60,13 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
 
   return (
     <Button
+      form={step === "confirm" ? "confirm" : undefined}
       size={"size_54"}
       className={"w-full font-medium"}
       animation={"toggle_sm"}
       onClick={current.action}
       disabled={!current.is_valid()}
-      iconRight={<ChevronIcon width={20} height={20} />}
-    >Далее</Button>
+      iconRight={<current.icon />}
+    >{current.text}</Button>
   )
 }

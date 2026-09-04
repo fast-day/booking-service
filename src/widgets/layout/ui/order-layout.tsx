@@ -44,7 +44,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
             <div>
 
               {order.slot && (
-                <OrderDate date={order.date} slot={order.slot} duration={order.service?.duration} />
+                <OrderDate date={order.date || new Date()} slot={order.slot} duration={order.service?.duration} />
               )}
 
               {order.service && (

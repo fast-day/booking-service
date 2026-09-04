@@ -44,7 +44,9 @@ declare global {
 
   type CurrencyType = "RUB" | "USD" | "EUR";
 
-  type MarkType = "red" | "orange" | "green" | "blue" | "purple" | "teal" | "pink";
+  type BookingType = "online" | "offline";
+
+  type MarkType = "red" | "orange" | "green" | "blue" | "purple" | "teal" | "pink" | "primary";
   
   type DaysType = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
   type DateType = "days" | "dates";

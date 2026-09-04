@@ -1429,6 +1429,7 @@ __metadata:
     react-dom: "npm:^19.2.8"
     react-hook-form: "npm:^7.85.0"
     react-motion: "npm:^0.5.2"
+    react-number-format: "npm:^5.4.5"
     rimraf: "npm:^6.1.3"
     sonner: "npm:^2.0.8"
     swiper: "npm:^14.2.0"
@@ -2988,6 +2989,16 @@ __metadata:
   peerDependencies:
     react: ^0.14.9 || ^15.3.0 || ^16.0.0
   checksum: 10/a63229a09c1fd9d4afc62d2256261af28d2d982b722f680a1e979b8efa4120461646a07f59118264be37fdd19a554cf3d0788710c6fca7c8a50284644cb2ab98
+  languageName: node
+  linkType: hard
+
+"react-number-format@npm:^5.4.5":
+  version: 5.4.5
+  resolution: "react-number-format@npm:5.4.5"
+  peerDependencies:
+    react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/48c5f7c13e6cabf70259ba3f98237b58ca37a998b2a24f35a1df8b285d63345b544c96a5a35d933daf26a9a31dc6353dd22133d0d0dc8f0bb33c5cdfab69b35c
   languageName: node
   linkType: hard
 

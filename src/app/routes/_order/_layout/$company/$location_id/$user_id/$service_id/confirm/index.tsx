@@ -8,5 +8,6 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  return <ConfirmPage />
+  const params = Route.useParams();
+  return <ConfirmPage {...params} />
 }

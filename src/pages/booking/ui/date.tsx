@@ -16,7 +16,7 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
     user_id,
     location_id,
     service: order?.service,
-    date: order.date,
+    date: order.date ?? new Date(),
   });
 
   const content = isLoading ? (
@@ -31,7 +31,7 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
     <>
       <h1 className="text-3xl font-extrabold leading-7">Выберите дату и время</h1>
 
-      <WeeKCalendar selected={order.date} onSelected={setDate} />
+      <WeeKCalendar selected={order.date || new Date()} onSelected={setDate} />
 
       {content}
     </>

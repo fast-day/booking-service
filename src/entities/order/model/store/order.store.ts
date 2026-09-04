@@ -6,7 +6,7 @@ interface OrderState {
   order: {
     /* ===== TEST ===== */
     service?: IService;
-    date: Date,
+    date?: Date,
     slot?: string;
   };
   step: OrderSteps;
@@ -15,6 +15,7 @@ interface OrderState {
   setDate: (date: Date) => void;
   setSlot: (slot: string) => void;
   setStep: (step: OrderSteps) => void;
+  clear: () => void;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
@@ -25,4 +26,13 @@ export const useOrderStore = create<OrderState>((set) => ({
   setDate: date => set(p => ({ order: { ...(p.order), date, slot: undefined }, })),
   setSlot: slot => set(p => ({ order: { ...(p.order), slot },  step: "date", })),
   setStep: step => set({ step }),
+
+  clear: () => set({
+    order: {
+      service: undefined,
+      date: undefined,
+      slot: undefined
+    },
+    step: "service",
+  }),
 }));
