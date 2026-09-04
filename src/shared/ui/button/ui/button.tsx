@@ -39,7 +39,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && <Spinner className="mr-2 text-current" />}
         {!isLoading && iconLeft && <span className="mr-2">{iconLeft}</span>}
         <span className={classNameChild}>{children}</span>
-        {iconRight && <span className="ml-1">{iconRight}</span>}
+        {iconRight && <span className="ml-1 size-5">{iconRight}</span>}
       </button>
     );
   },

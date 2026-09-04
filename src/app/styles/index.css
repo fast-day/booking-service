@@ -149,6 +149,7 @@
   --text-xss: 12px;
   --text-11: 11px;
   --text-10: 10px;
+  --text-3xl: 32px;
 
   /* shadow */
   --shadow-dropdown: 0 4px 4px 0 var(--accent);

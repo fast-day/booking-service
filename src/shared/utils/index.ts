@@ -6,3 +6,5 @@ export { extractTimezoneOffset } from './timezone-offset/timezone-offset.util';
 export { sleep } from './sleeper/sleep';
 export { minuteFormat, calcEndTime } from './minute-format/minute-format';
 export { formatPrice } from './price/formatter';
+export * from './date/date-format';
+export * from './validate/phone.utils';
