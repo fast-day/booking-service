@@ -9,5 +9,6 @@ export const Route = createFileRoute(
 })
 
 function RouteComponent() {
-  return <ServicePage  />
+  const { user_id } = Route.useParams();
+  return <ServicePage user_id={user_id} />
 }

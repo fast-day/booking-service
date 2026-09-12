@@ -4,19 +4,13 @@ import { ApiError } from "@/shared/api/base/api";
 import { useCallback, useEffect, useState } from "react"
 import { toast } from "sonner";
 
-export const useGetServices = (): FetchStateProps<IService[]> => {
+export const useGetServices = (user_id: string): FetchStateProps<IService[]> => {
   const [state, setState] = useState<FetchStateProps<IService[]>>({ data: undefined, isLoading: true, error: null, isError: false, isSuccess: false });
 
   const getServices = useCallback(async () => {
-    const userId = localStorage.getItem("user_id");
-    if (!userId) {
-      setState(p => ({ ...p, isLoading: false }));
-      return;
-    }
-
     setState(p => ({ ...p, error: null, isError: false, isSuccess: false }));
     try {
-      const res = await serviceApi.getAll(userId);
+      const res = await serviceApi.getAll(user_id);
       setState(p => ({ ...p, data: res, isSuccess: true }));
     }
     catch (err) {
