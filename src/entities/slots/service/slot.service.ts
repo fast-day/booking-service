@@ -5,7 +5,7 @@ import { buildQuery } from "@/shared/lib";
 class SlotApi extends BaseRoute {
   async get(dto: ISlotCredentials) {
     const { path, query } = dto;
-    return this.http.get<string[]>(buildQuery(`/v1/directory/employee/slots/${path.user_id}/${path.location_id}`, { ...query })).then(r => r.data);
+    return this.http.get<string[]>(buildQuery(`/v1/directory/employee/slots/${path.user_id}/`, { ...query })).then(r => r.data);
   }
 }
 

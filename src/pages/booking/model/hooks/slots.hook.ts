@@ -24,8 +24,8 @@ export const useSlots = ({ user_id, location_id, service, date }: IUseServicePro
       const dateFormat = formatDate(date);
 
       const res = await slotApi.get({
-        path: { user_id, location_id, },
-        query: { date: dateFormat, duration: service?.duration },
+        path: { user_id, },
+        query: { date: dateFormat, duration: service?.duration, location_id },
       });
 
       setState(p => ({ ...p, data: res, isSuccess: true }));
