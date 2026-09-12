@@ -9,11 +9,13 @@ export const useInitialize = (company: string, location_id: string, user_id: str
   const initialize = useCallback(async () => {
     try {
       const res = await companyApi.info({ company, location_id, user_id });
+      localStorage.setItem("user_id", String(res.employee.profile.id));
       setState(p => ({ ...p, data: res, error: null, isError: false, isSuccess: false }));
     } 
     catch (e) {
       if (e instanceof ApiError) {
         toast.error(e.message);
+        localStorage.removeItem("user_id");
         setState(p => ({ ...p, error: e.message, isSuccess: true }));
       }
     }

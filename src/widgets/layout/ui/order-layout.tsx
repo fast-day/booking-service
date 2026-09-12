@@ -14,9 +14,9 @@ interface IOrderLayoutProps extends PropsWithChildren {
 }
 
 export const OrderLayout = ({ company, location_id, user_id, children }: IOrderLayoutProps) => {
+  const { order, step, setStep } = useOrderState();
   const { isLoading, data } = useInitialize(company, location_id, user_id);
 
-  const { order, step, setStep } = useOrderState();
 
   if (isLoading) {
     return <AppLoading />

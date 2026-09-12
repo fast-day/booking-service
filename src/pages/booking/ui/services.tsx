@@ -1,12 +1,8 @@
 import { ServiceCard } from "@/entities/service";
 import { useGetServices } from "../model/hooks/service.hook";
 
-interface IServicePageProps {
-  user_id: string;
-}
-
-export const ServicePage = ({ user_id }: IServicePageProps) => {
-  const { isLoading, data } = useGetServices(user_id);
+export const ServicePage = () => {
+  const { isLoading, data } = useGetServices();
 
   return (
     <>
