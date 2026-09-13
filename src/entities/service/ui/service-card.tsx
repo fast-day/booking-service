@@ -9,11 +9,11 @@ interface IServiceCardProps {
 }
 
 export const ServiceCard = ({ service }: IServiceCardProps) => {
-  const { id, name, price, duration, avatar } = service;
+  const { uuid, name, price, duration, avatar } = service;
   
   const { order, setService } = useOrderState();
 
-  const isSelect = order.service?.id === service.id;
+  const isSelect = order.service?.uuid === uuid;
 
   const handleSelect = (s: IService) => {
     setService({ ...s });
@@ -26,7 +26,7 @@ export const ServiceCard = ({ service }: IServiceCardProps) => {
     >
       <CardContent className="px-4 py-3.75 grid gap-5">
         <div className="flex items-center gap-3.75 w-full">
-          <Avatar size={"size_64"} id={id} name={name} avatar_url={avatar} />
+          <Avatar size={"size_64"} id={uuid} name={name} avatar_url={avatar} />
           <div className="grid flex-1 gap-1.75">
             <p className="font-extrabold text-xl leading-5">{name}</p>
             <div className="flex items-center gap-3">

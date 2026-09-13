@@ -35,7 +35,7 @@ export const useConfirm = (public_name: string, location_id: string, user_id: st
       const body = {
         services: [
           {
-            service_id: service.id,
+            service_id: service.uuid,
             price: service.price.price,
             count: 1,
             start_time: `${formatDate(date)}T${slot}`,

@@ -14,7 +14,8 @@ export interface IServiceDiscount {
 }
 
 export interface IService {
-  id: string;
+  uuid: string;
+  id: number;
   name: string;
   mark: MarkType;
   duration: number;
