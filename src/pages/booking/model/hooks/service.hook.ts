@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export const useGetServices = (user_id: string): FetchStateProps<IService[]> => {
   const [state, setState] = useState<FetchStateProps<IService[]>>({ data: undefined, isLoading: true, error: null, isError: false, isSuccess: false });
-  
+
   const getServices = useCallback(async () => {
     setState(p => ({ ...p, error: null, isError: false, isSuccess: false }));
     try {
@@ -22,7 +22,7 @@ export const useGetServices = (user_id: string): FetchStateProps<IService[]> => 
     finally {
       setState(p => ({ ...p, isLoading: false }));
     }
-  }, [user_id]);
+  }, []);
 
   useEffect(() => {
     getServices();
