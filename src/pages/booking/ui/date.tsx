@@ -12,7 +12,7 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
   const setDate = useOrderState().setDate;
   const setSlot = useOrderState().setSlot;
 
-  const { data, isLoading, isSuccess, isError } = useSlots({
+  const { data, isLoading, isError } = useSlots({
     user_id,
     location_id,
     service: order?.service,
@@ -22,17 +22,15 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
   const content = isLoading ? (
     <div className="text-center text-sm py-10 opacity-60">Загрузка...</div>
   ) : isError ? (
-    <div className="text-center text-sm py-10 opacity-60">Нет свободных слотов на выбранную дату</div>
-  ) : isSuccess ? (
-    <Slots data={data} selectSlot={order.slot} setSlot={setSlot} />
-  ) : <div className="text-center text-sm py-10 opacity-60">Произошла ошибка</div>;
+    <div className="text-center text-sm py-10 opacity-60">Не удалось загрузить слоты</div>
+  ) : (
+    <Slots data={data} date={order.date ?? new Date()} selectSlot={order.slot} setSlot={setSlot} />
+  );
 
   return (
     <>
       <h1 className="text-3xl font-extrabold leading-7">Выберите дату и время</h1>
-
       <WeeKCalendar selected={order.date || new Date()} onSelected={setDate} />
-
       {content}
     </>
   )

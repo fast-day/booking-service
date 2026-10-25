@@ -22,15 +22,14 @@ const SLIDES_COUNT = 5;
 
 export const WeeKCalendar = ({ selected, onSelected }: IWeeKCalendarProps) => {
   const ref = useRef<SwiperType | null>(null);
+  const [weekOffset, setWeekOffset] = useState(0);
 
-const [weekOffset, setWeekOffset] = useState(0);
-
-const weeks = useMemo(() => {
-  return Array.from( { length: SLIDES_COUNT }, (_, index) => {
-    const offset = weekOffset + index - CENTER;
-    return getWeekDays( addWeeks(ANCHOR, offset) );
-  });
-}, [weekOffset]);
+  const weeks = useMemo(() => {
+    return Array.from( { length: SLIDES_COUNT }, (_, index) => {
+      const offset = weekOffset + index - CENTER;
+      return getWeekDays( addWeeks(ANCHOR, offset) );
+    });
+  }, [weekOffset]);
 
   const currentWeekDays = weeks[CENTER];
 

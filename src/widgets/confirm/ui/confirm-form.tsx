@@ -5,12 +5,10 @@ import { PatternFormat } from "react-number-format"
 
 interface IConfirmFormProps {
   company: string;
-  location_id: string;
-  user_id: string;
 }
 
-export const ConfirmForm = ({ company, location_id, user_id }: IConfirmFormProps) => {
-  const { onSubmit } = useConfirm(company, location_id, user_id);
+export const ConfirmForm = ({ company }: IConfirmFormProps) => {
+  const { onSubmit } = useConfirm(company);
 
   return (
     <div>

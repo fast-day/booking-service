@@ -13,7 +13,7 @@ export const Route = createFileRoute(
       service_id: p.service_id,
     }),
   },
-  errorComponent: () => <div>упс...</div>,
+  errorComponent: ({ error }) => <div>{error.stack}</div>,
   component: RouteComponent,
 })
 

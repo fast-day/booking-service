@@ -5,6 +5,10 @@ class ServiceApi extends BaseRoute {
   async getAll(user_id: string) {
     return this.http.get<IService[]>(`/v1/booking/widgets/services/${user_id}`).then(r => r.data);
   }
+  
+  async getOne(service_id: string) {
+    return this.http.get<IService>(`/v1/booking/widgets/service/${service_id}`).then(r => r.data);
+  }
 }
 
 export const serviceApi = new ServiceApi(httpClient);

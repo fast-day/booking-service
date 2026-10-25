@@ -7,16 +7,18 @@ import { formatDate } from "@/shared/utils";
 import { bookingApi, type IBookingCreateCredentials } from "@/entities/booking";
 import { useNavigate } from "@tanstack/react-router";
 
-interface IUseConfirmReturnProps extends FetchStateProps<string> {
+interface IUseConfirmReturnProps {
   onSubmit: (data: ConfirmType) => Promise<void>;
 }
 
-export const useConfirm = (public_name: string, location_id: string, user_id: string): IUseConfirmReturnProps => {
+export const useConfirm = (public_name: string): IUseConfirmReturnProps => {
   const navigate = useNavigate();
-  const { order, clear } = useOrderState();
+  const order = useOrderState().order;
+  const employee_id = useOrderState().company?.employee.profile.id;
+  const location_id = useOrderState().company?.company.location_uuid;
+  const clear = useOrderState().clear;
 
-  const [state, setState] = useState<FetchStateProps<string>>({
-    data: undefined,
+  const [state, setState] = useState<Omit<FetchStateProps<string>, "data">>({
     isLoading: false,
     isSuccess: false,
     isError: false,
@@ -24,7 +26,8 @@ export const useConfirm = (public_name: string, location_id: string, user_id: st
   });
 
   const onSubmit = async (data: ConfirmType) => {
-    if (!order.service || !order.date || !order.slot) {
+    if (state.isLoading) return;
+    if (!order.service || !order.date || !order.slot || !employee_id || !location_id) {
       return;
     }
     setState(p => ({ ...p, isLoading: true, isSuccess: false, isError: false, error: null }));
@@ -40,7 +43,7 @@ export const useConfirm = (public_name: string, location_id: string, user_id: st
             count: 1,
             start_time: `${formatDate(date)}T${slot}`,
             duration: service.duration,
-            users: [{ id: user_id }],
+            users: [{ id: employee_id }],
           },
         ],
         location_id,
@@ -51,10 +54,9 @@ export const useConfirm = (public_name: string, location_id: string, user_id: st
 
       await bookingApi.create({ public_name, body });
 
-      clear();
       navigate({ to: "/success", replace: true });
-
-      setState(p => ({ ...p, data: "", isSuccess: true }));
+      setState(p => ({ ...p, isSuccess: true }));
+      clear();
     }
     catch (err) {
       if (err instanceof ApiError) {
@@ -68,5 +70,5 @@ export const useConfirm = (public_name: string, location_id: string, user_id: st
     }
   }
 
-  return { onSubmit, ...state };
+  return { onSubmit };
 }

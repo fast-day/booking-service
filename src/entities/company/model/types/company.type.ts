@@ -11,6 +11,7 @@ export interface ICompany {
   name: string;
   public_name: string;
   logo: string | null;
+  location_uuid: string;
   timezone: string;
   currency: CurrencyType;
 }
