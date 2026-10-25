@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { isBefore, startOfDay } from "date-fns";
 import type { IService } from "@/entities/service";
-import type { OrderSteps } from "../types/order.types";
+import type { ICompanyInfo } from "@/entities/company";
 
 interface OrderState {
   order: {
@@ -9,34 +10,27 @@ interface OrderState {
     date?: Date,
     slot?: string;
   };
-  step: OrderSteps;
-  user_id: string | null;
+  company: ICompanyInfo | undefined;
 
-  setService: (service: IService) => void;
-  setDate: (date: Date) => void;
-  setSlot: (slot: string) => void;
-  setStep: (step: OrderSteps) => void;
-  setUserId: (id: string) => void;
+  setService: (s: IService) => void;
+  hydrateService: (s: IService) => void;
+  setDate: (d: Date) => void;
+  setSlot: (s: string) => void;
+  setCompany: (data: ICompanyInfo) => void;
   clear: () => void;
 }
 
 export const useOrderStore = create<OrderState>((set) => ({
   order: { date: new Date() },
-  step: "service",
-  user_id: null,
+  company: undefined,
 
-  setService: service => set({ order: { service, date: new Date(), }, step: "service" }),
-  setDate: date => set(p => ({ order: { ...(p.order), date, slot: undefined }, })),
-  setSlot: slot => set(p => ({ order: { ...(p.order), slot },  step: "date", })),
-  setStep: step => set({ step }),
-  setUserId: user_id => set({ user_id }),
-
-  clear: () => set({
-    order: {
-      service: undefined,
-      date: undefined,
-      slot: undefined
-    },
-    step: "service",
-  }),
+  setService: service => set({ order: { service, date: new Date() } }),
+  hydrateService: service => set(p => ({ order: { ...p.order, service } })),
+  setDate: date => {
+    if (isBefore(startOfDay(date), startOfDay(new Date()))) return;
+    set(p => ({ order: { ...p.order, date, slot: undefined } }));
+  },
+  setSlot: slot => set(p => ({ order: { ...p.order, slot } })),
+  setCompany: company => set({ company }),
+  clear: () => set({ order: { date: new Date() } }),
 }));

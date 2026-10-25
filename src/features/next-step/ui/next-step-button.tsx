@@ -6,11 +6,10 @@ import { useNavigate } from "@tanstack/react-router"
 interface INextStepButtonProps {
   is_service: boolean;
   is_slot: boolean;
-  service_id?: string;
+  service_id?: number;
   company: string;
   location_id: string;
   user_id: string;
-  setStep: (step: OrderSteps) => void;
   step: OrderSteps;
 }
 
@@ -27,7 +26,7 @@ interface IStepConfig {
   confirm: StepConfig;
 }
 
-export const NextStepButton = ({ is_service, is_slot, service_id, company, location_id, user_id, setStep, step }: INextStepButtonProps) => {
+export const NextStepButton = ({ is_service, is_slot, service_id, company, location_id, user_id, step }: INextStepButtonProps) => {
   const navigate = useNavigate();
 
   const stepConf: IStepConfig = {
@@ -35,7 +34,6 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
       is_valid: () => is_service,
       action: () => {
         navigate({ to: `${service_id}/date` });
-        setStep("date");
       },
       text: "Далее",
       icon: ChevronIcon,
@@ -44,7 +42,6 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
       is_valid: () => is_slot,
       action: () => {
         navigate({ to: `/${company}/${location_id}/${user_id}/${service_id}/confirm` });
-        setStep("confirm");
       },
       text: "Продолжить",
       icon: ChevronIcon,

@@ -2,8 +2,6 @@ import { ConfirmForm } from "@/widgets/confirm"
 
 interface IConfirmPageProps {
   company: string;
-  location_id: string;
-  user_id: string;
 }
 
 export const ConfirmPage = ({ ...props }: IConfirmPageProps) => {

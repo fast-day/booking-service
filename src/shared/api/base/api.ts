@@ -1,3 +1,4 @@
+import { apiUrl } from '@/shared/constants';
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
 export class ApiError extends Error {
@@ -23,7 +24,7 @@ export const CreateApi = (conf: AxiosRequestConfig): AxiosInstance => {
 }
 
 export const httpClient = CreateApi({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: apiUrl,
   timeout: 15_000,
 });
 

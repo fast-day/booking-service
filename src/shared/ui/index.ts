@@ -2,7 +2,6 @@ export * from './form';
 export * from './button';
 export * from './spinner';
 export * from './toaster';
-export * from './select';
 export * from './card';
 export * from './skeleton';
 export * from './input/input';

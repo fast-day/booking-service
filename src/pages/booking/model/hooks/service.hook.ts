@@ -25,7 +25,7 @@ export const useGetServices = (user_id: string): FetchStateProps<IService[]> => 
   }, []);
 
   useEffect(() => {
-    getServices();
+    void getServices();
   }, [getServices]);
 
   return { ...state };

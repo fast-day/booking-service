@@ -1,10 +1,12 @@
-import { OrderDate, OrderEmpty, OrderService, useOrderState } from "@/entities/order"
+import { OrderDate, OrderEmpty, OrderService, useOrderState, type OrderSteps } from "@/entities/order"
 import { EmployeeCard } from "@/entities/user"
 import { useInitialize } from "@/features/initialize"
 import { NextStepButton } from "@/features/next-step"
+import { useEnsureService } from "@/shared/hooks"
 import { formatPrice } from "@/shared/utils"
 import { ContentPanel } from "@/widgets/content-panel/ui/content-panel"
 import { AppLoading } from "@/widgets/loading"
+import { useLocation, useParams } from "@tanstack/react-router"
 import { type PropsWithChildren } from "react"
 
 interface IOrderLayoutProps extends PropsWithChildren {
@@ -14,11 +16,16 @@ interface IOrderLayoutProps extends PropsWithChildren {
 }
 
 export const OrderLayout = ({ company, location_id, user_id, children }: IOrderLayoutProps) => {
-  const { order, step, setStep } = useOrderState();
+  const { service_id } = useParams({ strict: false });
+  const order = useOrderState().order;
+  const { isLoading: serviceLoading } = useEnsureService(service_id);
   const { isLoading, data } = useInitialize(company, location_id, user_id);
 
+  const pathname = useLocation({ select: l => l.pathname });
+  const step: OrderSteps = pathname.endsWith("/confirm") ? "confirm"
+    : pathname.endsWith("/date") ? "date" : "service";
 
-  if (isLoading) {
+  if (isLoading || serviceLoading) {
     return <AppLoading />
   }
 
@@ -33,11 +40,10 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
           <NextStepButton
             is_service={!!order?.service}
             is_slot={!!order?.slot}
-            service_id={order?.service?.id}
+            service_id={order?.service && order.service.id}
             company={company}
             location_id={location_id}
             user_id={user_id}
-            setStep={setStep}
             step={step}
           />
           {order.service !== undefined && (
