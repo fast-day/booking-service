@@ -52,9 +52,9 @@ export const useConfirm = (public_name: string): IUseConfirmReturnProps => {
         type: "online",
       } satisfies IBookingCreateCredentials["body"];
 
-      await bookingApi.create({ public_name, body });
+      const res = await bookingApi.create({ public_name, body });
 
-      navigate({ to: "/success", replace: true });
+      navigate({ to: `/success/${res.id}`, replace: true });
       setState(p => ({ ...p, isSuccess: true }));
       clear();
     }

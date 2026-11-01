@@ -1,7 +1,6 @@
 import { confirmSchema, useConfirm } from "@/features/confirm"
-import { Form, InputForm, TextareaForm } from "@/shared/ui"
+import { Form, InputForm, PhoneInput, TextareaForm } from "@/shared/ui"
 import { Controller } from "react-hook-form"
-import { PatternFormat } from "react-number-format"
 
 interface IConfirmFormProps {
   company: string;
@@ -25,20 +24,14 @@ export const ConfirmForm = ({ company }: IConfirmFormProps) => {
               name={"phone"}
               control={control}
               render={({ field, formState }) => (
-                <PatternFormat
-                  id={"phone"}
-                  name={"phone"}
-                  format={"+7 (###) ### ##-##"}
-                  mask={"_"}
-                  onChange={(v) => field.onChange(v)}
+                <PhoneInput
+                  id="phone"
+                  name="phone"
                   value={field.value}
-                  customInput={InputForm}
-                  required
-                  register={register("phone")}
-                  label={"Номер телефона"}
-                  inputSize={"size_56"}
+                  onChange={field.onChange}
+                  inputSize="size_56"
                   error={formState.errors["phone"]}
-                  placeholder={"+7 (000) 000 00-00"}
+                  placeholder="Телефон"
                 />
               )}
             />

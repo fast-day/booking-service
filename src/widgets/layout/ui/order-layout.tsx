@@ -3,10 +3,12 @@ import { EmployeeCard } from "@/entities/user"
 import { useInitialize } from "@/features/initialize"
 import { NextStepButton } from "@/features/next-step"
 import { useEnsureService } from "@/shared/hooks"
-import { formatPrice } from "@/shared/utils"
+import { ArrowBackUpIcon } from "@/shared/icons"
+import { Button } from "@/shared/ui"
+import { cn, formatPrice } from "@/shared/utils"
 import { ContentPanel } from "@/widgets/content-panel/ui/content-panel"
 import { AppLoading } from "@/widgets/loading"
-import { useLocation, useParams } from "@tanstack/react-router"
+import { useLocation, useParams, useRouter } from "@tanstack/react-router"
 import { type PropsWithChildren } from "react"
 
 interface IOrderLayoutProps extends PropsWithChildren {
@@ -17,6 +19,7 @@ interface IOrderLayoutProps extends PropsWithChildren {
 
 export const OrderLayout = ({ company, location_id, user_id, children }: IOrderLayoutProps) => {
   const { service_id } = useParams({ strict: false });
+  const { history } = useRouter();
   const order = useOrderState().order;
   const { isLoading: serviceLoading } = useEnsureService(service_id);
   const { isLoading, data } = useInitialize(company, location_id, user_id);
@@ -30,44 +33,68 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
   }
 
   return (
-    <div className="flex justify-between h-full">
-      <div className="py-6 max-w-145 mx-auto w-full space-y-10">
-        {children}
-      </div>
-      <ContentPanel>
-        <div className="grid gap-6">
-          {data && <EmployeeCard profile={data.employee.profile} /> }
-          <NextStepButton
-            is_service={!!order?.service}
-            is_slot={!!order?.slot}
-            service_id={order?.service && order.service.id}
-            company={company}
-            location_id={location_id}
-            user_id={user_id}
-            step={step}
-          />
-          {order.service !== undefined && (
-            <div>
-
-              {order.slot && (
-                <OrderDate date={order.date || new Date()} slot={order.slot} duration={order.service?.duration} />
-              )}
-
-              {order.service && (
-                <OrderService {...order.service} />
-              )}
-
-              <div className="flex items-center justify-between py-6">
-                <div className="text-2xl font-extrabold leading-8">Итого</div>
-                <div className="text-xl font-extrabold leading-8">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
-              </div>
-            </div>
-          )}
+    <>
+      {step !== "service" && (
+        <Button
+          data-ui="page-header-back-action"
+          data-action="back"
+          variant={"white"}
+          animation={"toggle"}
+          className={"size-11 text-sm font-bold"}
+          size={"size_44"}
+          onClick={() => history.back()}
+        >
+          <ArrowBackUpIcon width={24} height={24} />
+        </Button>
+      )}
+      <div className="flex 1100:flex-row flex-col justify-between h-full">
+        <div className={cn(
+          "py-6 max-w-145 mx-auto w-full space-y-10 1100:pb-6 pb-60",
+          step === "confirm" && "pb-6"
+        )}>
+          {children}
         </div>
+        <ContentPanel isConfirm={step === "confirm"}>
+          <div className="grid gap-6">
+            {data && <EmployeeCard profile={data.employee} className={step === "confirm" ? "flex" : "hidden 1100:flex"} />}
 
-        {order.service === undefined && <OrderEmpty />}
+            {order.service !== undefined && (
+              <div className={cn(step !== "confirm" && "hidden 1100:block")}>
+                {order.slot && (
+                  <OrderDate date={order.date || new Date()} slot={order.slot} duration={order.service?.duration} />
+                )}
 
-      </ContentPanel>
-    </div>
+                {order.service && <OrderService {...order.service} />}
+
+                <div className="flex items-center justify-between py-6">
+                  <div className="text-2xl font-extrabold leading-8">Итого</div>
+                  <div className="text-xl font-extrabold leading-8">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
+                </div>
+              </div>
+            )}
+
+            {step !== "confirm" && (
+              <div className="1100:hidden flex items-center justify-between">
+                <div className="text-xl font-extrabold">Итого</div>
+                <div className="text-lg font-extrabold">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
+              </div>
+            )}
+
+            <NextStepButton
+              is_service={!!order?.service}
+              is_slot={!!order?.slot}
+              service_id={order?.service && order.service.id}
+              company={company}
+              location_id={location_id}
+              user_id={user_id}
+              step={step}
+            />
+          </div>
+
+          {order.service === undefined && <OrderEmpty />}
+
+        </ContentPanel>
+      </div>
+    </>
   )
 }

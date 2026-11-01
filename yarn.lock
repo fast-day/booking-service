@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 10
   cacheKey: 10
 
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.29.7":
@@ -1424,10 +1424,12 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.1.1"
     eslint-plugin-react-refresh: "npm:^0.5.3"
     globals: "npm:^17.7.0"
+    libphonenumber-js: "npm:^1.13.15"
     lucide-react: "npm:^1.31.0"
     react: "npm:^19.2.8"
     react-dom: "npm:^19.2.8"
     react-hook-form: "npm:^7.85.0"
+    react-international-phone: "npm:^4.8.0"
     react-motion: "npm:^0.5.2"
     react-number-format: "npm:^5.4.5"
     rimraf: "npm:^6.1.3"
@@ -2322,6 +2324,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.13.15":
+  version: 1.13.15
+  resolution: "libphonenumber-js@npm:1.13.15"
+  checksum: 10/01c715a9526db7d114477155f69a071e47667ae62fa58b9e59d06fce3f6c9950aac8eb47dc6b9873493c88f2f9efa915bea7820a5b9a101821dd7cf19388c881
+  languageName: node
+  linkType: hard
+
 "lightningcss-android-arm64@npm:1.32.0":
   version: 1.32.0
   resolution: "lightningcss-android-arm64@npm:1.32.0"
@@ -2969,6 +2978,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
   checksum: 10/ab3c695866c6f803cb56ac71385a103f12879a72ca353b979b7d159e92cc54de721c988af8ff52ce3bca6181b50bb80e085567aae7819c7a7db1fcb1bfb2565d
+  languageName: node
+  linkType: hard
+
+"react-international-phone@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "react-international-phone@npm:4.8.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/c5b3cbdbae50cc444552697d65ff14530c54ab605e34254a3405d8e13eda76c4bc2a5437a738e2c538c9c204cec83f0296acfe724b5f747b5ff9a6b0cc7c0d22
   languageName: node
   linkType: hard
 

@@ -29,8 +29,10 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold leading-7">Выберите дату и время</h1>
-      <WeeKCalendar selected={order.date || new Date()} onSelected={setDate} />
+      <h1 className="1100:text-3xl text-2xl font-extrabold leading-7">Выберите дату и время</h1>
+      <div className="min-w-0">
+        <WeeKCalendar selected={order.date || new Date()} onSelected={setDate} />
+      </div>
       {content}
     </>
   )

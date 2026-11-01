@@ -13,7 +13,7 @@ import { Route as OrderRouteRouteImport } from './app/routes/_order/route'
 import { Route as OrderLayoutRouteRouteImport } from './app/routes/_order/_layout/route'
 import { Route as OrderLayoutIndexRouteImport } from './app/routes/_order/_layout/index'
 import { Route as OrderLayoutNotFoundRouteImport } from './app/routes/_order/_layout/$notFound'
-import { Route as OrderLayoutSuccessIndexRouteImport } from './app/routes/_order/_layout/success/index'
+import { Route as OrderLayoutSuccessBooking_idRouteImport } from './app/routes/_order/_layout/success/$booking_id'
 import { Route as OrderLayoutCompanyLocation_idUser_idRouteRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/route'
 import { Route as OrderLayoutCompanyLocation_idUser_idIndexRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/index'
 import { Route as OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/$service_id/confirm/index'
@@ -37,11 +37,12 @@ const OrderLayoutNotFoundRoute = OrderLayoutNotFoundRouteImport.update({
   path: '/$notFound',
   getParentRoute: () => OrderLayoutRouteRoute,
 } as any)
-const OrderLayoutSuccessIndexRoute = OrderLayoutSuccessIndexRouteImport.update({
-  id: '/success/',
-  path: '/success/',
-  getParentRoute: () => OrderLayoutRouteRoute,
-} as any)
+const OrderLayoutSuccessBooking_idRoute =
+  OrderLayoutSuccessBooking_idRouteImport.update({
+    id: '/success/$booking_id',
+    path: '/success/$booking_id',
+    getParentRoute: () => OrderLayoutRouteRoute,
+  } as any)
 const OrderLayoutCompanyLocation_idUser_idRouteRoute =
   OrderLayoutCompanyLocation_idUser_idRouteRouteImport.update({
     id: '/$company/$location_id/$user_id',
@@ -70,7 +71,7 @@ const OrderLayoutCompanyLocation_idUser_idService_idDateIndexRoute =
 export interface FileRoutesByFullPath {
   '/': typeof OrderLayoutIndexRoute
   '/$notFound': typeof OrderLayoutNotFoundRoute
-  '/success/': typeof OrderLayoutSuccessIndexRoute
+  '/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
   '/$company/$location_id/$user_id/': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
   '/$company/$location_id/$user_id/$service_id/confirm/': typeof OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRoute
@@ -79,7 +80,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof OrderLayoutIndexRoute
   '/$notFound': typeof OrderLayoutNotFoundRoute
-  '/success': typeof OrderLayoutSuccessIndexRoute
+  '/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
   '/$company/$location_id/$user_id/$service_id/confirm': typeof OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRoute
   '/$company/$location_id/$user_id/$service_id/date': typeof OrderLayoutCompanyLocation_idUser_idService_idDateIndexRoute
@@ -90,7 +91,7 @@ export interface FileRoutesById {
   '/_order/_layout': typeof OrderLayoutRouteRouteWithChildren
   '/_order/_layout/$notFound': typeof OrderLayoutNotFoundRoute
   '/_order/_layout/': typeof OrderLayoutIndexRoute
-  '/_order/_layout/success/': typeof OrderLayoutSuccessIndexRoute
+  '/_order/_layout/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/_order/_layout/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
   '/_order/_layout/$company/$location_id/$user_id/': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
   '/_order/_layout/$company/$location_id/$user_id/$service_id/confirm/': typeof OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRoute
@@ -101,7 +102,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$notFound'
-    | '/success/'
+    | '/success/$booking_id'
     | '/$company/$location_id/$user_id'
     | '/$company/$location_id/$user_id/'
     | '/$company/$location_id/$user_id/$service_id/confirm/'
@@ -110,7 +111,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$notFound'
-    | '/success'
+    | '/success/$booking_id'
     | '/$company/$location_id/$user_id'
     | '/$company/$location_id/$user_id/$service_id/confirm'
     | '/$company/$location_id/$user_id/$service_id/date'
@@ -120,7 +121,7 @@ export interface FileRouteTypes {
     | '/_order/_layout'
     | '/_order/_layout/$notFound'
     | '/_order/_layout/'
-    | '/_order/_layout/success/'
+    | '/_order/_layout/success/$booking_id'
     | '/_order/_layout/$company/$location_id/$user_id'
     | '/_order/_layout/$company/$location_id/$user_id/'
     | '/_order/_layout/$company/$location_id/$user_id/$service_id/confirm/'
@@ -161,11 +162,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrderLayoutNotFoundRouteImport
       parentRoute: typeof OrderLayoutRouteRoute
     }
-    '/_order/_layout/success/': {
-      id: '/_order/_layout/success/'
-      path: '/success'
-      fullPath: '/success/'
-      preLoaderRoute: typeof OrderLayoutSuccessIndexRouteImport
+    '/_order/_layout/success/$booking_id': {
+      id: '/_order/_layout/success/$booking_id'
+      path: '/success/$booking_id'
+      fullPath: '/success/$booking_id'
+      preLoaderRoute: typeof OrderLayoutSuccessBooking_idRouteImport
       parentRoute: typeof OrderLayoutRouteRoute
     }
     '/_order/_layout/$company/$location_id/$user_id': {
@@ -223,14 +224,14 @@ const OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren =
 interface OrderLayoutRouteRouteChildren {
   OrderLayoutNotFoundRoute: typeof OrderLayoutNotFoundRoute
   OrderLayoutIndexRoute: typeof OrderLayoutIndexRoute
-  OrderLayoutSuccessIndexRoute: typeof OrderLayoutSuccessIndexRoute
+  OrderLayoutSuccessBooking_idRoute: typeof OrderLayoutSuccessBooking_idRoute
   OrderLayoutCompanyLocation_idUser_idRouteRoute: typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
 }
 
 const OrderLayoutRouteRouteChildren: OrderLayoutRouteRouteChildren = {
   OrderLayoutNotFoundRoute: OrderLayoutNotFoundRoute,
   OrderLayoutIndexRoute: OrderLayoutIndexRoute,
-  OrderLayoutSuccessIndexRoute: OrderLayoutSuccessIndexRoute,
+  OrderLayoutSuccessBooking_idRoute: OrderLayoutSuccessBooking_idRoute,
   OrderLayoutCompanyLocation_idUser_idRouteRoute:
     OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren,
 }

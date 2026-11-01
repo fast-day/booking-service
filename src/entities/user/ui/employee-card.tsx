@@ -1,12 +1,18 @@
 import { Avatar } from "@/shared/ui"
 import type { IEmployee } from "../types/employee.type";
+import { cn } from "@/shared/utils";
 
-export const EmployeeCard = ({ profile }: Omit<IEmployee, "id">) => {
+interface IEmployeeCardProps {
+  profile: IEmployee;
+  className?: string;
+}
+
+export const EmployeeCard = ({ profile, className="" }: IEmployeeCardProps) => {
   return (
-    <div className="flex items-center gap-3.5">
-      <Avatar size={"size_64"} id={profile.id} name={profile.full_name} avatar_url={profile.avatar} />
+    <div className={cn("items-center gap-3.5", className)}>
+      <Avatar size={"size_64"} id={profile.profile.id} name={profile.profile.full_name} avatar_url={profile.profile.avatar} />
       <div className="space-y-2">
-        <h2 className="text-xl font-extrabold leading-4">{profile.full_name}</h2>
+        <h2 className="text-xl font-extrabold leading-4">{profile.profile.full_name}</h2>
       </div>
     </div>
   )

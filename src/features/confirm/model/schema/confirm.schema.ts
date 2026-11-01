@@ -1,13 +1,12 @@
-import { RUS_PHONE } from "@/shared/utils";
 import z from "zod";
+import { isPossiblePhoneNumber } from 'libphonenumber-js';
 
 export const confirmSchema = z.object({
-  phone: 
-    z.string("Укажите номер телефона")
-    .min(1, "Укажите номер телефона")
-    .refine((v) => {
-      return RUS_PHONE.test(v);
-    }, "Неверный формат"),
+  phone: z
+    .object({ value: z.string(), masked: z.string() })
+    .refine((v) => v.value.length > 0, "Укажите номер телефона")
+    .refine((v) => !v.value || isPossiblePhoneNumber(v.value), "Неверный формат")
+    .transform((v) => v.masked),
 
   email: z.email("Укажите email"),
   first_name: z.string().min(1, "Обязательное поле"),

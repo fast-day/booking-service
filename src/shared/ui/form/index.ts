@@ -4,3 +4,4 @@ export * from './label';
 export * from './input';
 export * from './error';
 export * from './textarea';
+export * from './phone-input';
