@@ -16,6 +16,7 @@ const PAGE = 28;
 export const WeeKCalendar = ({ selected, onSelected }: IWeeKCalendarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(PAGE * 2);
+  const [firstIdx, setFirstIdx] = useState(0);
 
   const today = useMemo(() => startOfDay(new Date()), []);
   const days = useMemo(
@@ -23,11 +24,19 @@ export const WeeKCalendar = ({ selected, onSelected }: IWeeKCalendarProps) => {
     [today, count]
   );
 
-  const monthTitle = format(selected, "LLLL yyyy", { locale: ru });
+  const monthTitle = format(days[firstIdx] ?? today, "LLLL yyyy", { locale: ru });
 
   const handleScroll = useCallback(() => {
     const el = ref.current;
-    if (el && el.scrollWidth - el.scrollLeft - el.clientWidth < el.clientWidth) {
+    if (!el) return;
+
+    const [a, b] = [el.children[0], el.children[1]] as HTMLElement[];
+    if (a && b) {
+      const step = b.offsetLeft - a.offsetLeft;
+      if (step > 0) setFirstIdx(Math.round(el.scrollLeft / step));
+    }
+
+    if (el.scrollWidth - el.scrollLeft - el.clientWidth < el.clientWidth) {
       setCount(c => c + PAGE);
     }
   }, []);
