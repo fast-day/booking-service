@@ -48,6 +48,7 @@ export interface IBookingServices {
     category: string;
     prices: { price: number, cost_price: number | null };
   }
+  user: IBookingEmployee;
 }
 
 export interface IBookingEmployee {
@@ -69,7 +70,6 @@ export interface IBooking {
   end_time: string;
   customer: IBookingCustomer;
   booking_services: IBookingServices[]
-  user: IBookingEmployee;
 }
 
 // МУСОР - Я СПЕШУ
