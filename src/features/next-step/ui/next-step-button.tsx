@@ -1,5 +1,5 @@
 import type { OrderSteps } from "@/entities/order";
-import { ChevronIcon, NewOrderIcon } from "@/shared/icons"
+import { ChevronIcon } from "@/shared/icons"
 import { Button } from "@/shared/ui"
 import { useNavigate } from "@tanstack/react-router"
 
@@ -48,8 +48,8 @@ export const NextStepButton = ({ is_service, is_slot, service_id, company, locat
     },
     confirm: {
       is_valid: () => is_service && is_slot,
-      text: "Записаться",
-      icon: NewOrderIcon,
+      text: "Записаться и принять условия",
+      icon: ChevronIcon,
     }
   };
 

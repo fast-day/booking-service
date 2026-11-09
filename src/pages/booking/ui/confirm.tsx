@@ -7,7 +7,7 @@ interface IConfirmPageProps {
 export const ConfirmPage = ({ ...props }: IConfirmPageProps) => {
   return (
     <>
-      <h1 className="text-3xl font-extrabold leading-7">Личная информация</h1>
+      <h1 className="1100:text-3xl text-2xl font-extrabold leading-7">Личная информация</h1>
 
       <ConfirmForm {...props} />
     </>

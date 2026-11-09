@@ -48,6 +48,7 @@ export interface IBookingServices {
     category: string;
     prices: { price: number, cost_price: number | null };
   }
+  user: IBookingEmployee;
 }
 
 export interface IBookingEmployee {
@@ -69,5 +70,34 @@ export interface IBooking {
   end_time: string;
   customer: IBookingCustomer;
   booking_services: IBookingServices[]
-  user: IBookingEmployee;
+}
+
+// МУСОР - Я СПЕШУ
+export type CustomerProfile = {
+  id: string;
+  full_name: string;
+  first_name: string;
+  last_name: string | null;
+  phone: string;
+  avatar: string | null;
+  birthday: string | null;
+}
+
+export interface IDirectoryCustomer {
+  id: string;
+  customer_attributes: CustomerProfile & {
+    profile_id: string;
+    birthday: string | null;
+    email: string | null;
+  };
+  visit_total: number;
+  bookings_count: number;
+  bookings_total: number;
+}
+
+export interface IBookingDetail extends Omit<IBooking, "payment_method" | "subtotal" | "order_id" | "customer"> {
+  order_id: string | null;
+  customer: IDirectoryCustomer;
+  updated_date: string;
+  updated_time: string;
 }

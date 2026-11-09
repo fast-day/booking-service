@@ -10,7 +10,7 @@ export const ServicePage = ({ user_id }: IServicePageProps) => {
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold leading-7">Выберите услугу</h1>
+      <h1 className="1100:text-3xl text-2xl font-extrabold leading-7">Выберите услугу</h1>
 
       <div className="grid gap-2.5">
         {isLoading ? (
