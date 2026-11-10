@@ -1,0 +1,56 @@
+name: CLI
+
+on:
+  workflow_call:
+    inputs:
+      run_linter:
+        required: false
+        type: boolean
+        default: false
+      run_tests:
+        required: false
+        type: boolean
+        default: true
+      run_check_types:
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ">=24"
+          cache: "yarn"
+
+      - name: Setup Go
+        run: yarn install --immutable
+
+      - name: Linter
+        if: ${{ inputs.run_linter }}
+        run: yarn lint
+
+      - name: Check Types
+        if: ${{ inputs.run_check_types }}
+        run: yarn check-types
+
+      - name: Tests
+        if: ${{ inputs.run_tests }}
+        run: yarn test -- --coverage
+        
+      - name: Upload coverage
+        if: ${{ inputs.run_tests }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+        
+      - name: Build
+        run: yarn build
