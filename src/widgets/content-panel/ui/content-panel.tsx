@@ -10,7 +10,7 @@ export const ContentPanel = ({ children, isConfirm }: IContentPanelProps) => {
   return (
     <div className={cn(
       "bg-white max-w-145 mx-auto w-full rounded-4xl flex",
-      "1100:mx-0 1100:min-w-95 1100:max-w-120 1100:mr-8 1100:h-[calc(100vh-92px)] 1100:top-6 1100:self-start",
+      "1100:mx-0 1100:min-w-95 1100:max-w-120 1100:h-[calc(100vh-92px)] 1100:top-6 1100:self-start",
       isConfirm
         ? "1100:sticky"
         : "fixed bottom-0 left-0 right-0 rounded-b-none 1100:sticky 1100:inset-x-auto 1100:bottom-auto 1100:rounded-4xl",

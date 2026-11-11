@@ -10,6 +10,7 @@ import { ContentPanel } from "@/widgets/content-panel/ui/content-panel"
 import { AppLoading } from "@/widgets/loading"
 import { useLocation, useParams, useRouter } from "@tanstack/react-router"
 import { type PropsWithChildren } from "react"
+import { BaseLayout } from "./base-layout"
 
 interface IOrderLayoutProps extends PropsWithChildren {
   company: string;
@@ -33,7 +34,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
   }
 
   return (
-    <>
+    <BaseLayout>
       {step !== "service" && (
         <Button
           data-ui="page-header-back-action"
@@ -49,7 +50,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
       )}
       <div className="flex 1100:flex-row flex-col justify-between flex-1">
         <div className={cn(
-          "py-6 max-w-145 mx-auto w-full space-y-10 1100:pb-6 pb-60",
+          "max-w-145 mx-auto w-full space-y-10 1100:space-y-6",
           step === "confirm" && "pb-6"
         )}>
           {children}
@@ -95,6 +96,6 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
 
         </ContentPanel>
       </div>
-    </>
+    </BaseLayout>
   )
 }
