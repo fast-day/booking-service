@@ -71,8 +71,8 @@ jobs:
 
             echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ vars.DOCKER_USER }} --password-stdin
 
-            docker compose -f docker-compose.prod.yml pull crm
-            docker compose -f docker-compose.prod.yml stop crm
-            docker compose -f docker-compose.prod.yml rm -f crm
+            docker compose -f docker-compose.prod.yml pull booking
+            docker compose -f docker-compose.prod.yml stop booking
+            docker compose -f docker-compose.prod.yml rm -f booking
             docker compose -f docker-compose.prod.yml up -d
             docker image prune -f

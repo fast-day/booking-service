@@ -16,7 +16,7 @@ function NotFoundRedirect() {
     if (window.history.length > 1) {
       router.history.back()
     } else {
-      window.location.replace('https://youtube.ru')
+      window.location.replace('https://fast-day.ru')
     }
   }, [router])
 
