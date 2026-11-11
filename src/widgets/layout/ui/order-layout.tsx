@@ -47,7 +47,7 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
           <ArrowBackUpIcon width={24} height={24} />
         </Button>
       )}
-      <div className="flex 1100:flex-row flex-col justify-between h-full">
+      <div className="flex 1100:flex-row flex-col justify-between flex-1">
         <div className={cn(
           "py-6 max-w-145 mx-auto w-full space-y-10 1100:pb-6 pb-60",
           step === "confirm" && "pb-6"

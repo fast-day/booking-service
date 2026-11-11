@@ -81,6 +81,10 @@ export const Success = ({ booking_id }: ISuccessProps) => {
       <Card className="motion-safe:animate-rise mt-10 w-full divide-y divide-border px-5 py-2 text-lef bg-white" style={delay(750)}>
         <Row label="Услуга" value={bs.service.name} />
         <Row label="Специалист" value={bs.user.full_name} />
+        <div className="flex justify-between gap-4 py-3 text-sm">
+          <span className="text-accent/50">Телефон</span>
+          <a href={`tel:${bs.user.phone}`} className="text-right font-medium hover:underline duration-150">{bs.user.phone}</a>
+        </div>
         <Row label="Итого" value={fmtPrice(total)} />
       </Card>
 

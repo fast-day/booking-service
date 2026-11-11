@@ -1,5 +1,6 @@
 import { ServiceCard } from "@/entities/service";
 import { useGetServices } from "../model/hooks/service.hook";
+import { ServiceLazyCard } from "@/entities/service/ui/service-lazy-card";
 
 interface IServicePageProps {
   user_id: string;
@@ -14,7 +15,7 @@ export const ServicePage = ({ user_id }: IServicePageProps) => {
 
       <div className="grid gap-2.5">
         {isLoading ? (
-          <div>Загрузка...</div>
+          Array.from({ length: 3 }).map((_, idx) => <ServiceLazyCard key={idx} />)
         ): (
           data && data.map((service) => (
             <ServiceCard service={service} key={service.id} />

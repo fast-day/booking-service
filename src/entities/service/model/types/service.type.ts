@@ -1,3 +1,5 @@
+import type { ImageUrls } from "@/shared/ui/avatar/types/image.type";
+
 export interface IServicePrice {
   price: number;
   cost_price: number | null;
@@ -20,7 +22,7 @@ export interface IService {
   mark: MarkType;
   duration: number;
   category: string | null;
-  avatar: string | null;
+  avatar: ImageUrls;
   price: IServicePrice;
   discount: IServiceDiscount;
 }

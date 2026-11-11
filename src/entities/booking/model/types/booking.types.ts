@@ -1,4 +1,5 @@
 import type { ConfirmType } from "@/features/confirm";
+import type { ImageUrls } from "@/shared/ui/avatar/types/image.type";
 
 export interface IBookingServiceUser {
   id: string;
@@ -29,7 +30,7 @@ interface IBookingCustomer {
   full_name: string;
   first_name: string;
   last_name: string | null;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export interface IBookingServices {
@@ -44,7 +45,7 @@ export interface IBookingServices {
     name: string;
     mark: MarkType;
     duration: number;
-    avatar: string | null;
+    avatar: ImageUrls;
     category: string;
     prices: { price: number, cost_price: number | null };
   }
@@ -57,7 +58,7 @@ export interface IBookingEmployee {
   first_name: string;
   last_name: string | null;
   phone: string;
-  avatar: string | null;
+  avatar: ImageUrls;
 }
 
 export interface IBooking {
@@ -79,7 +80,7 @@ export type CustomerProfile = {
   first_name: string;
   last_name: string | null;
   phone: string;
-  avatar: string | null;
+  avatar: ImageUrls;
   birthday: string | null;
 }
 

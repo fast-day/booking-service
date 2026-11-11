@@ -9,45 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './app/routes/__root'
+import { Route as SplatRouteImport } from './app/routes/$'
 import { Route as OrderRouteRouteImport } from './app/routes/_order/route'
-import { Route as OrderLayoutRouteRouteImport } from './app/routes/_order/_layout/route'
-import { Route as OrderLayoutIndexRouteImport } from './app/routes/_order/_layout/index'
-import { Route as OrderLayoutNotFoundRouteImport } from './app/routes/_order/_layout/$notFound'
 import { Route as OrderLayoutSuccessBooking_idRouteImport } from './app/routes/_order/_layout/success/$booking_id'
 import { Route as OrderLayoutCompanyLocation_idUser_idRouteRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/route'
 import { Route as OrderLayoutCompanyLocation_idUser_idIndexRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/index'
 import { Route as OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/$service_id/confirm/index'
 import { Route as OrderLayoutCompanyLocation_idUser_idService_idDateIndexRouteImport } from './app/routes/_order/_layout/$company/$location_id/$user_id/$service_id/date/index'
 
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrderRouteRoute = OrderRouteRouteImport.update({
   id: '/_order',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OrderLayoutRouteRoute = OrderLayoutRouteRouteImport.update({
-  id: '/_layout',
-  getParentRoute: () => OrderRouteRoute,
-} as any)
-const OrderLayoutIndexRoute = OrderLayoutIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => OrderLayoutRouteRoute,
-} as any)
-const OrderLayoutNotFoundRoute = OrderLayoutNotFoundRouteImport.update({
-  id: '/$notFound',
-  path: '/$notFound',
-  getParentRoute: () => OrderLayoutRouteRoute,
-} as any)
 const OrderLayoutSuccessBooking_idRoute =
   OrderLayoutSuccessBooking_idRouteImport.update({
-    id: '/success/$booking_id',
+    id: '/_layout/success/$booking_id',
     path: '/success/$booking_id',
-    getParentRoute: () => OrderLayoutRouteRoute,
+    getParentRoute: () => OrderRouteRoute,
   } as any)
 const OrderLayoutCompanyLocation_idUser_idRouteRoute =
   OrderLayoutCompanyLocation_idUser_idRouteRouteImport.update({
-    id: '/$company/$location_id/$user_id',
+    id: '/_layout/$company/$location_id/$user_id',
     path: '/$company/$location_id/$user_id',
-    getParentRoute: () => OrderLayoutRouteRoute,
+    getParentRoute: () => OrderRouteRoute,
   } as any)
 const OrderLayoutCompanyLocation_idUser_idIndexRoute =
   OrderLayoutCompanyLocation_idUser_idIndexRouteImport.update({
@@ -69,8 +58,8 @@ const OrderLayoutCompanyLocation_idUser_idService_idDateIndexRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof OrderLayoutIndexRoute
-  '/$notFound': typeof OrderLayoutNotFoundRoute
+  '/': typeof OrderRouteRouteWithChildren
+  '/$': typeof SplatRoute
   '/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
   '/$company/$location_id/$user_id/': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
@@ -78,8 +67,8 @@ export interface FileRoutesByFullPath {
   '/$company/$location_id/$user_id/$service_id/date/': typeof OrderLayoutCompanyLocation_idUser_idService_idDateIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof OrderLayoutIndexRoute
-  '/$notFound': typeof OrderLayoutNotFoundRoute
+  '/': typeof OrderRouteRouteWithChildren
+  '/$': typeof SplatRoute
   '/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
   '/$company/$location_id/$user_id/$service_id/confirm': typeof OrderLayoutCompanyLocation_idUser_idService_idConfirmIndexRoute
@@ -88,9 +77,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_order': typeof OrderRouteRouteWithChildren
-  '/_order/_layout': typeof OrderLayoutRouteRouteWithChildren
-  '/_order/_layout/$notFound': typeof OrderLayoutNotFoundRoute
-  '/_order/_layout/': typeof OrderLayoutIndexRoute
+  '/$': typeof SplatRoute
   '/_order/_layout/success/$booking_id': typeof OrderLayoutSuccessBooking_idRoute
   '/_order/_layout/$company/$location_id/$user_id': typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
   '/_order/_layout/$company/$location_id/$user_id/': typeof OrderLayoutCompanyLocation_idUser_idIndexRoute
@@ -101,7 +88,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/$notFound'
+    | '/$'
     | '/success/$booking_id'
     | '/$company/$location_id/$user_id'
     | '/$company/$location_id/$user_id/'
@@ -110,7 +97,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/$notFound'
+    | '/$'
     | '/success/$booking_id'
     | '/$company/$location_id/$user_id'
     | '/$company/$location_id/$user_id/$service_id/confirm'
@@ -118,9 +105,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_order'
-    | '/_order/_layout'
-    | '/_order/_layout/$notFound'
-    | '/_order/_layout/'
+    | '/$'
     | '/_order/_layout/success/$booking_id'
     | '/_order/_layout/$company/$location_id/$user_id'
     | '/_order/_layout/$company/$location_id/$user_id/'
@@ -130,10 +115,18 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   OrderRouteRoute: typeof OrderRouteRouteWithChildren
+  SplatRoute: typeof SplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_order': {
       id: '/_order'
       path: ''
@@ -141,40 +134,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrderRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_order/_layout': {
-      id: '/_order/_layout'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof OrderLayoutRouteRouteImport
-      parentRoute: typeof OrderRouteRoute
-    }
-    '/_order/_layout/': {
-      id: '/_order/_layout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof OrderLayoutIndexRouteImport
-      parentRoute: typeof OrderLayoutRouteRoute
-    }
-    '/_order/_layout/$notFound': {
-      id: '/_order/_layout/$notFound'
-      path: '/$notFound'
-      fullPath: '/$notFound'
-      preLoaderRoute: typeof OrderLayoutNotFoundRouteImport
-      parentRoute: typeof OrderLayoutRouteRoute
-    }
     '/_order/_layout/success/$booking_id': {
       id: '/_order/_layout/success/$booking_id'
       path: '/success/$booking_id'
       fullPath: '/success/$booking_id'
       preLoaderRoute: typeof OrderLayoutSuccessBooking_idRouteImport
-      parentRoute: typeof OrderLayoutRouteRoute
+      parentRoute: typeof OrderRouteRoute
     }
     '/_order/_layout/$company/$location_id/$user_id': {
       id: '/_order/_layout/$company/$location_id/$user_id'
       path: '/$company/$location_id/$user_id'
       fullPath: '/$company/$location_id/$user_id'
       preLoaderRoute: typeof OrderLayoutCompanyLocation_idUser_idRouteRouteImport
-      parentRoute: typeof OrderLayoutRouteRoute
+      parentRoute: typeof OrderRouteRoute
     }
     '/_order/_layout/$company/$location_id/$user_id/': {
       id: '/_order/_layout/$company/$location_id/$user_id/'
@@ -221,30 +193,15 @@ const OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren =
     OrderLayoutCompanyLocation_idUser_idRouteRouteChildren,
   )
 
-interface OrderLayoutRouteRouteChildren {
-  OrderLayoutNotFoundRoute: typeof OrderLayoutNotFoundRoute
-  OrderLayoutIndexRoute: typeof OrderLayoutIndexRoute
+interface OrderRouteRouteChildren {
   OrderLayoutSuccessBooking_idRoute: typeof OrderLayoutSuccessBooking_idRoute
   OrderLayoutCompanyLocation_idUser_idRouteRoute: typeof OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren
 }
 
-const OrderLayoutRouteRouteChildren: OrderLayoutRouteRouteChildren = {
-  OrderLayoutNotFoundRoute: OrderLayoutNotFoundRoute,
-  OrderLayoutIndexRoute: OrderLayoutIndexRoute,
+const OrderRouteRouteChildren: OrderRouteRouteChildren = {
   OrderLayoutSuccessBooking_idRoute: OrderLayoutSuccessBooking_idRoute,
   OrderLayoutCompanyLocation_idUser_idRouteRoute:
     OrderLayoutCompanyLocation_idUser_idRouteRouteWithChildren,
-}
-
-const OrderLayoutRouteRouteWithChildren =
-  OrderLayoutRouteRoute._addFileChildren(OrderLayoutRouteRouteChildren)
-
-interface OrderRouteRouteChildren {
-  OrderLayoutRouteRoute: typeof OrderLayoutRouteRouteWithChildren
-}
-
-const OrderRouteRouteChildren: OrderRouteRouteChildren = {
-  OrderLayoutRouteRoute: OrderLayoutRouteRouteWithChildren,
 }
 
 const OrderRouteRouteWithChildren = OrderRouteRoute._addFileChildren(
@@ -253,6 +210,7 @@ const OrderRouteRouteWithChildren = OrderRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   OrderRouteRoute: OrderRouteRouteWithChildren,
+  SplatRoute: SplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

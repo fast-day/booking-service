@@ -22,7 +22,7 @@ export const Slots = ({ data, date, selectSlot, setSlot }: ISlotsProps) => {
   }
 
   return (
-    <div className="grid gap-2.5 justify-center">
+    <>
       {slots.map((interval, idx) => (
         <SlotCard
           key={idx}
@@ -31,6 +31,6 @@ export const Slots = ({ data, date, selectSlot, setSlot }: ISlotsProps) => {
           onSelect={setSlot}
         />
       ))}
-    </div>
+    </>
   )
 }

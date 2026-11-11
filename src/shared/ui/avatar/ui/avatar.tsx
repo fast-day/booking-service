@@ -1,6 +1,7 @@
 import { cn } from "@/shared/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { getAvatarColor } from "../utils/get-color.util";
+import type { ImageUrls } from "../types/image.type";
 
 const avatarVariants = cva(
   "flex items-center gap-0.5 text-lg justify-center bg-primary-foreground/35 relative overflow-hidden",
@@ -38,7 +39,7 @@ type AvatarProps =
 VariantProps<typeof avatarVariants> & React.ComponentProps<"div"> & 
 AvatarUnion & {
   id: string;
-  avatar_url?: string | null;
+  avatar_url?: ImageUrls | null;
   name: string;
   opacity?: number;
   children?: React.ReactNode;
@@ -53,7 +54,14 @@ export const Avatar = ({ id, avatar_url, size, name, className, opacity, childre
       {...props}
     >
       {avatar_url ? (
-        <img className={cn(avatarVariants({ size }), "object-cover w-full h-full")} src={avatar_url} alt={name} />
+        <img
+          className={cn(avatarVariants({ size }), "object-cover w-full h-full")}
+          src={avatar_url.md}
+          srcSet={`${avatar_url.sm} 480w, ${avatar_url.md} 960w, ${avatar_url.lg} 1920w`}
+          sizes={"(max-width: 600px) 480px, 960px"}
+          loading={"lazy"}
+          alt={name}
+        />
       ) : (
         isIcon ? <>{icon}</> :
         <span className="uppercase font-medium leading-5 select-none -tracking">

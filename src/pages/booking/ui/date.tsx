@@ -1,6 +1,7 @@
 import { useOrderState } from "@/entities/order";
 import { Slots, WeeKCalendar } from "@/widgets/calendar"
 import { useSlots } from "../model/hooks/slots.hook";
+import { Skeleton } from "@/shared/ui";
 
 interface IDatePageProps {
   user_id: string;
@@ -20,7 +21,7 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
   });
 
   const content = isLoading ? (
-    <div className="text-center text-sm py-10 opacity-60">Загрузка...</div>
+    Array.from({ length: 6 }).map((_, idx) => <Skeleton key={idx} className="w-64.5 h-13.5 rounded-xl" />)
   ) : isError ? (
     <div className="text-center text-sm py-10 opacity-60">Не удалось загрузить слоты</div>
   ) : (
@@ -33,7 +34,9 @@ export const DatePage = ({ user_id, location_id }: IDatePageProps) => {
       <div className="min-w-0">
         <WeeKCalendar selected={order.date || new Date()} onSelected={setDate} />
       </div>
-      {content}
+      <div className="grid gap-2.5 justify-center">
+        {content}
+      </div>
     </>
   )
 }

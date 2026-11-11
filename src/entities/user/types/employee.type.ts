@@ -1,3 +1,5 @@
+import type { ImageUrls } from "@/shared/ui/avatar/types/image.type";
+
 export interface IEmployee {
   id: string;
   profile: {
@@ -7,6 +9,6 @@ export interface IEmployee {
     full_name: string;
     phone: string;
     position: string;
-    avatar: string | null;
+    avatar: ImageUrls;
   }
 }
