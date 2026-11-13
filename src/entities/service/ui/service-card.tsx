@@ -24,14 +24,14 @@ export const ServiceCard = ({ service }: IServiceCardProps) => {
       className={cn("cursor-pointer hover:bg-primary/10 duration-200", isSelect ? "bg-white hover:bg-white" : "")}
       onClick={() => handleSelect(service)}
     >
-      <CardContent className="px-4 py-3.75 grid gap-5">
+      <CardContent className="px-2.5 sm:px-4 py-2.5 sm:py-3.75 grid gap-5">
         <div className="flex items-center gap-3.75 w-full">
           <Avatar size={"size_64"} id={uuid} name={name} avatar_url={avatar} />
           <div className="grid flex-1 gap-1.75">
-            <p className="font-extrabold text-xl leading-5">{name}</p>
+            <p className="font-bold text-base 480:text-lg sm:text-xl leading-5">{name}</p>
             <div className="flex items-center gap-3">
-              <p className="text-sm opacity-50 leading-4">{formatPrice(price.price)} ₽</p>
-              <p className="text-sm opacity-50 leading-4">{minuteFormat(duration)}</p>
+              <p className="text-xss 480:text-sm opacity-50 leading-4">{formatPrice(price.price)} ₽</p>
+              <p className="text-xss 480:text-sm opacity-50 leading-4">{minuteFormat(duration)}</p>
             </div>
           </div>
 
@@ -39,7 +39,7 @@ export const ServiceCard = ({ service }: IServiceCardProps) => {
             variant={"white"}
             size={"icon_44"}
             animation={"toggle_sm"}
-            className={cn(isSelect ? "bg-primary text-white" : "")}
+            className={cn(isSelect ? "bg-primary text-white" : "", "sm:flex hidden")}
             classNameChild={cn("duration-150 ease-initial")}
           >
             <ChevronIcon width={20} height={20}/>

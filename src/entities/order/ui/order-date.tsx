@@ -25,11 +25,11 @@ export const OrderDate = ({ date, slot, duration }: IOrderDateProps) => {
       <div className="py-5 space-y-2">
         <div className="flex items-center gap-2.5">
           <span><CalendarIcon width={20} height={20} opacity={0.8} /></span>
-          <span className="text-md font-medium leading-3.5 opacity-80 capitalize">{dateLabel}</span>
+          <span className="text-sm sm:text-md font-medium leading-3.5 opacity-80 capitalize">{dateLabel}</span>
         </div>
         <div className="flex items-center gap-2.5">
           <span><HourglassIcon width={20} height={20} opacity={0.8} /></span>
-          <span className="text-md font-medium leading-3.5 opacity-80">{timeLabel}</span>
+          <span className="text-sm sm:text-md font-medium leading-3.5 opacity-80">{timeLabel}</span>
         </div>
       </div>
     
