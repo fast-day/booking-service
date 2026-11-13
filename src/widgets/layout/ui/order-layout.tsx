@@ -67,9 +67,9 @@ export const OrderLayout = ({ company, location_id, user_id, children }: IOrderL
 
                 {order.service && <OrderService {...order.service} />}
 
-                <div className="flex items-center justify-between py-6">
-                  <div className="text-2xl font-extrabold leading-8">Итого</div>
-                  <div className="text-xl font-extrabold leading-8">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
+                <div className="flex items-center justify-between pb-0 pt-6 sm:py-6">
+                  <div className="text-xl sm:text-2xl font-extrabold leading-6 sm:leading-8">Итого</div>
+                  <div className="text-lg sm:text-xl font-extrabold leading-6 sm:leading-8">{formatPrice(order.service?.price.price ?? 0)} ₽</div>
                 </div>
               </div>
             )}

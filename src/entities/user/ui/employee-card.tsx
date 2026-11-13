@@ -12,7 +12,7 @@ export const EmployeeCard = ({ profile, className="" }: IEmployeeCardProps) => {
     <div className={cn("items-center gap-3.5", className)}>
       <Avatar size={"size_64"} id={profile.profile.id} name={profile.profile.full_name} avatar_url={profile.profile.avatar} />
       <div className="space-y-2">
-        <h2 className="text-xl font-extrabold leading-4">{profile.profile.full_name}</h2>
+        <h2 className="text-lg sm:text-xl font-bold">{profile.profile.full_name}</h2>
       </div>
     </div>
   )

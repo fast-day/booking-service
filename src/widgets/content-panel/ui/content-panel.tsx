@@ -19,7 +19,7 @@ export const ContentPanel = ({ children, isConfirm }: IContentPanelProps) => {
         <div className="h-full flex flex-col gap-5">
           {children}
           {isConfirm && (
-            <div className="text-sm opacity-50">
+            <div className="text-xss sm:text-sm opacity-50">
               {`Нажимая кнопку "Записаться", вы подтверждаете, что прочитали и соглашаетесь с `}
               <a href="https://storage.fast-day.ru/site-documents/terms_of_service_WEB111126.pdf" className="underline" target="_blank">Условия использования</a>
               {" и "}
